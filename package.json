@@ -1,0 +1,19 @@
+{
+  "name": "pre-entrega1",
+  "version": "1.0.0",
+  "description": "backend 1",
+  "main": "src/utils/server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Juan Martin Beloso",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Prueba4544",
+    "description": "Prueba2",
+    "price": 30000,
+    "status": false,
+    "category": "Joyas",
+    "stock": 3,
+    "id": 1,
+    "code": "11086a2a-7f5d-4115-92e0-ac99463ac9b3"
+  },
+  {
+    "title": "Prueba454423",
+    "description": "Prueba2",
+    "price": 30000,
+    "status": true,
+    "category": "Joyas",
+    "stock": 3,
+    "id": 2,
+    "code": "8fd6e934-31b7-4977-b790-8b6a5d2f0a2f"
+  }
+]
