@@ -1,0 +1,31 @@
+<main>
+  <h1>Bienvenido</h1>
+</main>
+
+<link rel="stylesheet" href="/css/style.css" />
+
+<div id="productList">
+  {{#each products}}
+    <div>
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>ID: {{this.id}}</p>
+      <p>Precio: {{this.price}}</p>
+      <p>Stock: {{this.stock}}</p>
+      <p>Categoría: {{this.category}}</p>
+    </div>
+  {{/each}}
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/js/index.js"></script>
+<script>
+  const socket = io(); socket.on('actualizarProductos', function(products) {
+  const productList = document.getElementById('productList');
+  productList.innerHTML = ''; products.forEach((product) => { const productItem
+  = document.createElement('div'); productItem.innerHTML = `
+  <h2>${product.title}</h2> <p>${product.description}</p> <p>ID:
+  ${product.id}</p> <p>Precio: ${product.price}</p> <p>Stock:
+  ${product.stock}</p> <p>Categoría: ${product.category}</p> `;
+  productList.appendChild(productItem); }); });
+</script>

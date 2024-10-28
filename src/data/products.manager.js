@@ -54,7 +54,9 @@ class ProductManager {
       // Reviso si el producto ya existe
       const duplicated = products.find((e) => e.title === newProduct.title);
       if (duplicated) {
-        return `El producto que usted ha ingresado ya existe dentro de la lista`;
+        throw new Error(
+          `El producto que usted ha ingresado ya existe dentro de la lista`
+        );
       }
 
       // Reviso que me haya dado los tipos de datos correctos

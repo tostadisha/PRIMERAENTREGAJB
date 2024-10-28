@@ -1,0 +1,75 @@
+<div id="productInfoForm"></div>
+<h1 id="productFormTitle">Ingrese su producto</h1>
+  <form id="productForm">
+    <label for="title">Título:</label>
+    <input type="text" id="titleSubmit" name="title" required>
+    <label for="description">Descripción:</label>
+    <input type="text" id="descriptionSubmit" name="description" required>
+    <label for="price">Precio:</label>
+    <input type="number" id="priceSubmit" name="price" required>
+    <label for="stock">Stock:</label>
+    <input type="number" id="stockSubmit" name="stock" required>
+    <label for="category">Categoría:</label>
+    <input type="text" id="categorySubmit" name="category" required>
+    <button type="submit">Crear</button>
+  </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    document.getElementById('productForm').addEventListener('submit', function(event){
+      event.preventDefault();
+      const title = document.getElementById('titleSubmit').value;
+      const description = document.getElementById('descriptionSubmit').value;
+      const price = parseFloat(document.getElementById('priceSubmit').value);
+      const stock = parseInt(document.getElementById('stockSubmit').value, 10);
+      const category = document.getElementById('categorySubmit').value;
+
+      const newProduct = {
+        title,
+        description,
+        price,
+        stock,
+        category
+      };
+      socket.emit('nuevoProducto', newProduct);
+      document.getElementById('productForm').reset();
+    });
+
+    socket.on('actualizarProductos', function(products) {
+    const productList = document.getElementById('productList');
+     productList.innerHTML = '';
+  
+  products.forEach((product) => {
+    const productItem = document.createElement('div');
+    productItem.innerHTML = `
+      <h2>${product.title}</h2>
+      <p>${product.description}</p>
+      <p>ID: ${product.id}</p>
+      <p>Precio: ${product.price}</p>
+      <p>Stock: ${product.stock}</p>
+      <p>Categoría: ${product.category}</p>
+      <button id="${product.id}">Borrar</button>
+    `;
+    productList.appendChild(productItem);
+    
+    const deleteButton = productItem.querySelector('button');
+    deleteButton.addEventListener('click', () => {
+      socket.emit('borrar Producto', product.id);
+    });
+  });
+});
+</script>
+<div id="productList">
+    {{#each products}}
+      <div>
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p>ID: {{this.id }}</p>
+        <p>Precio: {{this.price}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <p>Categoría: {{this.category}}</p>
+      </div>
+    {{/each}}
+  </div>
